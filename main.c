@@ -10,12 +10,12 @@ int main(int argc, char** argv)
 
         if (fd == -1) {
             if(errno == ENXIO) {
-                printf("%s: no reader", argv[i]);
+                printf("%s: no reader\n", argv[i]);
             } else {
-                printf("%s: open failed", argv[i]);
+                printf("%s: open failed\n", argv[i]);
             }
         } else {
-            printf("%s: successfully opened", argv[i]);
+            printf("%s: successfully opened\n", argv[i]);
             close(fd);
         }
     }
