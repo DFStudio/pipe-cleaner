@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <errno.h>
+#include <fcntl.h>
+
+int main(int argc, char** argv)
+{
+    for(int i = 1; i < argc; i++) {
+        int fd = open(argv[i], O_WRONLY | O_NONBLOCK);
+
+        if (fd == -1) {
+            if(errno == ENXIO) {
+                printf("%s: no reader", argv[i]);
+            } else {
+                printf("%s: open failed", argv[i]);
+            }
+        } else {
+            printf("%s: successfully opened", argv[i]);
+            close(fd);
+        }
+    }
+}
