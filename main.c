@@ -18,5 +18,18 @@ int main(int argc, char** argv)
             printf("%s: successfully opened\n", argv[i]);
             close(fd);
         }
+
+        fd = open(argv[i], O_RDONLY | O_NONBLOCK);
+
+        if (fd == -1) {
+            if(errno == ENXIO) {
+                printf("%s: no writer\n", argv[i]);
+            } else {
+                printf("%s: open failed\n", argv[i]);
+            }
+        } else {
+            printf("%s: successfully opened\n", argv[i]);
+            close(fd);
+        }
     }
 }
